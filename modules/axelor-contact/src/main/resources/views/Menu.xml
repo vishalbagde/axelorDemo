@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+  http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+  <menuitem name="menu-person-book" title="Address Book" />
+
+  <menuitem name="menu-person-friends" parent="menu-person-book"
+    title="All Person" action="person.all" />
+
+  <menuitem name="menu-title-friends" parent="menu-person-book"
+    title="All Title" action="title.all" />
+
+  <menuitem name="menu-country-friends"
+    parent="menu-person-book" title="All Country" action="country.all" />
+
+  <action-view name="person.all" title="Person"
+    model="com.axelor.contact.db.Person">
+    <view type="grid" name="person-grid" />
+    <view type="form" name="person-form" />
+  </action-view>
+
+  <action-view name="title.all" title="Title"
+    model="com.axelor.contact.db.Title">
+    <view type="grid" name="title-grid" />
+    <view type="form" name="title-form" />
+  </action-view>
+
+  <action-view name="country.all" title="Country"
+    model="com.axelor.contact.db.Country">
+    <view type="grid" name="country-grid" />
+    <view type="form" name="country-form" />
+  </action-view>
+
+  <menuitem name="menu-country-friends-name"
+    parent="menu-country-friends" title="India" action="country.name" />
+
+  <action-view name="country.name" title="India"
+    model="com.axelor.contact.db.Country">
+    <view type="grid" name="country-grid" />
+    <view type="form" name="country-form" />
+    <domain>self.name = 'India'</domain>
+  </action-view>
+
+</object-views>

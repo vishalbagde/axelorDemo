@@ -1,0 +1,4 @@
+rootProject.name = 'open-platform-demo'
+
+// Include modules
+include "modules:axelor-contact"
