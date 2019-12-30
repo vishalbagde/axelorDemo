@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+  <menuitem name="menu-persons-book" order="-100"
+    title="Person Book" icon="fa-user" icon-background="green" />
+
+
+    <menuitem name="menu-emp-all" parent="menu-persons-book"
+    title="All Employee" action="emp.all" />
+
+    <menuitem name="menu-title-all" parent="menu-persons-book"
+    title="All Title" action="title.all" />
+
+    <menuitem name="menu-country-all" parent="menu-persons-book"
+    title="All Country" action="country.all" />
+
+    <menuitem name="menu-circle-all" parent="menu-persons-book"
+    title="All Circle" action="circle.all" />
+
+    <menuitem name="menu-testing-all" parent="menu-persons-book"
+    title="Tree View" action="testing.all" />
+
+    <action-view name="testing.all" title="Tree View"
+    model="com.axelor.person.db.Contact">
+    <view type="tree" name="contact-email-tree" />
+  </action-view>
+
+
+
+    <action-view name="emp.all" title="Employee"
+    model="com.axelor.person.db.Contact">
+    <view type="cards" name="person-cards" />
+    <view type="form" name="person-form" />
+    <view type="tree" name="contact-email-tree" />
+    <context name="json-enhance" expr="true" />
+  </action-view>
+
+
+  <action-view name="title.all" title="Person"
+    model="com.axelor.person.db.Title">
+    <view type="grid" name="title-grid" />
+    <view type="form" name="title-form" />
+  </action-view>
+
+
+  <action-view name="country.all" title="Country"
+    model="com.axelor.person.db.Country">
+    <view type="grid" name="country-grid" />
+    <view type="form" name="country-form" />
+  </action-view>
+
+  <action-view name="circle.all" title="Circle"
+    model="com.axelor.person.db.Circle">
+    <view type="grid" name="circle-grid" />
+    <view type="form" name="circle-form" />
+  </action-view>
+</object-views>

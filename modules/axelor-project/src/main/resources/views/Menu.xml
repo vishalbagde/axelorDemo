@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+  <menuitem name="menu-project" order="-80"
+    title="Project Management" icon="fa-tasks" icon-background="violet" />
+
+  <menuitem name="menu-project-all" parent="menu-project"
+    title="All Projects"
+    action="project.all"/>
+    
+    <action-view name="project.all" title="Projects" model="com.axelor.project.db.Project">
+    <view type="grid" name="project-grid"/>
+    <view type="form" name="project-form"/>
+   </action-view>
+   
+   
+    <menuitem name="menu-project-task-all" parent="menu-project"
+    title="All Project Task"
+    action="projectTask.all"/>
+   
+   <action-view name="projectTask.all" title="Projects Task" model="com.axelor.project.db.ProjectTask">
+    <view type="grid" name="project-task-grid"/>
+    <view type="form" name="project-task-form"/>
+   </action-view>
+
+
+
+</object-views>

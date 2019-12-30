@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+	<selection name="project.task.state.selection">
+		<option value="todo">To-do</option>
+		<option value="progress">In progress</option>
+		<option value="complete">Completed</option>
+	</selection>
+
+	<grid name="project-task-grid" title="project Task"
+		model="com.axelor.project.db.ProjectTask">
+		<field name="name" />
+		<field name="createDate" />
+		<field name="startDate" />
+		<field name="endDate" />
+		<field name="user" />
+		<field name="project" />
+		<field name="priority" />
+		<field name="state" />
+		<field name="progress" widget="Progress" />
+	</grid>
+
+	<form name="project-task-form" title="Project Task"
+		model="com.axelor.project.db.ProjectTask">
+		<panel title="Overview">
+			<field name="name" />
+			<field name="priority" />
+			<field name="createDate" />
+			<field name="deadlineDate" />
+			<field name="startDate" />
+			<field name="endDate" />
+			<field name="project" />
+			<field name="user" />
+			<field name="parentTask" />
+			<field name="sequence" />
+			<field name="state" />
+			<field name="progress" widget="Progress" />
+		</panel>
+		
+		
+		<panel-tabs>
+			<panel-related field="workItems" editable="true">
+				<field name="name" />
+				<field name="date" />
+				<field name="hours" />
+			</panel-related>
+			<panel title="Notes">
+				<field name="notes" showTitle="false" colSpan="12" />
+			</panel>
+			<panel title="Planning">
+				<field name="plannedStartDate" />
+				<field name="plannedDuration" />
+				<field name="plannedProgress" />
+				<spacer />
+				<panel title="Linked project tasks" colSpan="12">
+					<field name="finishToStartTaskSet" widget="TagSelect" />
+					<field name="startToStartTaskSet" widget="TagSelect" />
+					<field name="finishToFinishTaskSet" widget="TagSelect" />
+					<field name="startToStartTaskSet" widget="TagSelect" />
+				</panel>
+			</panel>
+		</panel-tabs>
+
+
+	</form>
+
+
+</object-views>

@@ -41,7 +41,8 @@ allprojects {
 
 
 dependencies {
-  compile project(':modules:axelor-contact')
+  compile project(':modules:axelor-person')
+  compile project(':modules:axelor-project')
 }
 
 wrapper {

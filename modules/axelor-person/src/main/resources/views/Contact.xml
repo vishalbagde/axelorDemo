@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+
+
+  <tree name="contact-email-tree" title="Contact Email Tasks" width="50%">
+
+    <!-- define tree columns -->
+    <column name="firstName" type="string" />
+    <column name="email" type="string" />
+
+    <!-- define 1st level node -->
+    <node model="com.axelor.person.db.Contact" onClick="contacts.task.open.contact">
+      <field name="firstName" as="firstName" />
+    </node>
+
+    <!-- define 2nd level node -->
+    <node model="com.axelor.person.db.Email" parent="contact" draggable="true" >
+      <field name="email" as="email" />
+    </node>
+  </tree>
+
+  <cards name="person-cards" title="Persons"
+    model="com.axelor.person.db.Contact" orderBy="fullName" >
+    <field name="fullName" />
+    <field name="phone" />
+    <field name="email"/>
+    <field name="address"/>
+    <field name="hasImage"/>
+    <template><![CDATA[
+      <div class="span4 card-image">
+        <img ng-if="hasImage" ng-src="{{$image(null, 'image')}}">
+        <img ng-if="!hasImage" src="img/user.png">
+        <strong>{{fullName}}</strong>
+      </div>
+      <div class="span8">
+        <address>
+          <strong>{{address.street}} {{address.area}}</strong><br>
+          {{address.city}}<span ng-if="address.state">, {{address.state}}</span><span ng-if="address.zip"> - {{address.zip}}</span><br>
+          {{address.country.name}}<br>
+          <abbr ng-if="phone" title="Phone">P:</abbr> {{phone}}<br>
+          <abbr ng-if="email" title="Email">E:</abbr> {{email}}<br>
+        </address>
+      </div>
+    ]]></template>
+  </cards>
+
+  <form model="com.axelor.person.db.Contact" title="Person Form"
+    name="person-form">
+    <panel title="Personal" css="panel-red">
+        <panel colSpan="4">
+          <field name="image" showTitle="false" colSpan="12"></field>
+        </panel>
+      <panel colSpan="8">
+        <field name="fullName" title="Name" readonly="false"
+          colSpan="12">
+          <editor x-show-titles="false">
+            <field name="title" widget="SuggestBox" colSpan="2" />
+            <field name="firstName" colSpan="5" />
+            <field name="lastName" colSpan="5" />
+          </editor>
+        </field>
+        <field name="dateOfBirth" colSpan="7" />
+      </panel>
+    </panel>
+    <panel title="Contacts" css="panel-green">
+      <field name="emails">
+        <editor layout="table" x-show-titles="false">
+          <field name="email" />
+        </editor>
+      </field>
+
+
+      <field name="phones">
+        <editor layout="table" x-show-titles="false">
+          <field name="phoneType" width="100px"
+            selection="phone.type.selection" />
+          <field name="phone" css="border-left-none" />
+        </editor>
+      </field>
+
+
+      <field name="addresses" colSpan="12">
+        <editor x-show-titles="false">
+          <field name="street" colSpan="12" />
+          <field name="area" colSpan="12" />
+          <field name="city" colSpan="4" />
+          <field name="state" colSpan="4" />
+          <field name="zip" colSpan="4" />
+          <field name="country" widget="SuggestBox" colSpan="12" />
+        </editor>
+      </field>
+    </panel>
+
+    <panel title="Notes">
+      <field name="notes" showTitle="false" colSpan="12"  />
+    </panel>
+    <panel sidebar="true">
+      <field name="createdOn" />
+      <field name="updatedOn" />
+    </panel>
+  </form>
+
+
+
+  <kanban name="contact-task-kanban" title="Contact Tasks" model="com.axelor.person.db.Contact"
+    columnBy="state" sequenceBy="priority" onNew="project.task.kanban.on.new" limit="10">
+    <field name="name"/>
+    <field name="notes" />
+    <field name="progress"/>
+    <field name="startDate"/>
+    <field name="endDate"/>
+    <field name="user"/>
+    <hilite color="danger" if="progress == 0" />
+    <hilite color="success" if="progress == 100" />
+    <hilite color="info" if="progress >= 50" />
+    <hilite color="warning" if="progress > 0" />
+    <template><![CDATA[
+    <h4>{{name}}</h4>
+    <img ng-if="user" ng-src="{{$image('user', 'image')}}">
+    <div class="card-body">{{notes}}</div>
+    <div class="card-footer">
+      <i class='fa fa-clock-o'></i> <span>{{startDate|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+    </div>
+    ]]></template>
+  </kanban>
+
+
+
+  <action-view name="contacts.task.open.contact" title="Contact" model="com.axelor.person.db.Contact">
+    <view type="grid" name="person-grid"/>
+    <view type="form" name="project-form"/>
+    <domain>self.id= :contact_id</domain>
+    <context name="project_id" expr="eval: id"/>
+    <context name="_showSingle" expr="true"/>
+  </action-view>
+
+</object-views>
