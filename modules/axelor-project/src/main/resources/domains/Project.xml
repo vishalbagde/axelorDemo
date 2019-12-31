@@ -13,9 +13,7 @@
 
     <many-to-one name="parent" ref="Project"/>
     <many-to-many name="members" ref="com.axelor.auth.db.User" />
-
     <one-to-many name="tasks" ref="ProjectTask" mappedBy="project" />
-
 
   </entity>
 

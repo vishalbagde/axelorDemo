@@ -9,6 +9,9 @@
     <many-to-one name="title" ref="com.axelor.person.db.Title"/>
     <string name="firstName" required="true" initParam="true"/>
     <string name="lastName" required="true" initParam="true"/>
+
+    <string name="status" selection="contact.status.selection"></string>
+
     <string name="fullName" namecolumn="true" search="firstName,lastName"><![CDATA[
     if (firstName == null && lastName == null)
       return null;

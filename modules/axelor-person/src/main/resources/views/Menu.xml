@@ -28,6 +28,15 @@
   </action-view>
 
 
+    <menuitem name="menu-kanban-all" parent="menu-persons-book"
+    title="Kanban View" action="menu.person.kanban.all" />
+
+   <action-view name="menu.person.kanban.all" title="Kanban View"
+    model="com.axelor.person.db.Contact">
+    <view type="kanban" name="person-kanban" />
+  </action-view>
+
+
 
     <action-view name="emp.all" title="Employee"
     model="com.axelor.person.db.Contact">

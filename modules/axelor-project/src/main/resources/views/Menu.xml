@@ -7,24 +7,39 @@
     title="Project Management" icon="fa-tasks" icon-background="violet" />
 
   <menuitem name="menu-project-all" parent="menu-project"
-    title="All Projects"
-    action="project.all"/>
-    
-    <action-view name="project.all" title="Projects" model="com.axelor.project.db.Project">
-    <view type="grid" name="project-grid"/>
-    <view type="form" name="project-form"/>
-   </action-view>
-   
-   
-    <menuitem name="menu-project-task-all" parent="menu-project"
-    title="All Project Task"
-    action="projectTask.all"/>
-   
-   <action-view name="projectTask.all" title="Projects Task" model="com.axelor.project.db.ProjectTask">
-    <view type="grid" name="project-task-grid"/>
-    <view type="form" name="project-task-form"/>
-   </action-view>
+    title="All Projects" action="project.all" />
+
+  <action-view name="project.all" title="Projects"
+    model="com.axelor.project.db.Project">
+    <view type="grid" name="project-grid" />
+    <view type="form" name="project-form" />
+  </action-view>
+
+  <menuitem name="menu-project-task-all" parent="menu-project"
+    title="All Project Task" action="projectTask.all" />
+
+  <action-view name="projectTask.all" title="Projects Task"
+    model="com.axelor.project.db.ProjectTask">
+    <view type="grid" name="project-task-grid" />
+    <view type="form" name="project-task-form" />
+
+  </action-view>
+
+  <menuitem name="menu-project-task-tree-all" parent="menu-project"
+    title="All Project Task Tree" action="projectTaskTree.all" />
+
+  <action-view name="projectTaskTree.all" title="Projects Task Tree"
+    model="com.axelor.project.db.ProjectTask">
+    <view type="tree" name="project-task-tree" />
+  </action-view>
 
 
+  <menuitem name="menu-project-task-kanban" parent="menu-project"
+    title="All Project Task Kanban" action="projectTaskKanban.all" />
+
+  <action-view name="projectTaskKanban.all" title="Projects Task Kanban"
+    model="com.axelor.project.db.ProjectTask">
+    <view type="kanban" name="project-task-kanban" />
+  </action-view>
 
 </object-views>
