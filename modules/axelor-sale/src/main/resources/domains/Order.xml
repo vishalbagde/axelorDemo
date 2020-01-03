@@ -14,10 +14,11 @@
   <sequence name="sale.order.seq" increment="1" initial="1" prefix="SO" padding="5" />
 
   <entity name="Order">
+    <string name="orderNo" sequence="sale.order.seq"/>
     <many-to-one name="customer" ref="Customer" />
+    <decimal name="totalTax" />
     <decimal name="totalPrice" required="true" />
     <integer name="totalQuantity" min="1" required="true"/>
-    <integer name="sequence"/>
     <date name="orderDate"/>
     <date name="confirmDate"/>
     <boolean name="confirmed" />

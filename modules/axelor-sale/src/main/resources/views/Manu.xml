@@ -55,6 +55,15 @@
   </action-view>
 
 
+<menuitem title="Dashboard" name="menu-dashboard-all"
+    parent="menu-sale-management" order="-90" action="dashboard-all" />
+
+  <action-view name="dashboard-all" title="Dashboard"
+    model="com.axelor.sale.db.Order">
+    <view type="dashboard" name="dashboard-main-sale" />
+  </action-view>
+
+
 
 
 </object-views>

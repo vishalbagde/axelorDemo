@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+  <dashboard name="dashboard-main-sale" title="Sale Dashboard" >
+    <dashlet action="custom:custom-report-sale-today"  colSpan="4" />
+    <dashlet action="custom:custom-report-sale-month"  colSpan="4" />
+    <dashlet action="custom:custom-report-sale-year"  colSpan="4" />
+  </dashboard>
+
+  <custom name="custom-report-sale-today" title="Today Sales" css="report-box" >
+    <dataset type="jpql">
+      <![CDATA[
+        select sum(totalPrice) as total,count(Id) as total_qty from Order where orderDate = current_date
+      ]]>
+    </dataset>
+    <template>
+      <![CDATA[
+   <div class="report-data">
+     <h1>{{first.total}}</h1>
+     <small>Total Incomes</small>
+     <div class="report-tags"><span class="label label-important">Total Order: {{first.total_qty}}</span></div>
+   </div>
+   ]]>
+    </template>	
+  </custom>
+  <custom name="custom-report-sale-month" title="Monthly Sales" css="report-box" >
+    <dataset type="sql">
+      <![CDATA[
+      SELECT sum(total_price) as total,count(id) as total_qty from sale_order where order_date <= date_trunc('month',CURRENT_DATE) + interval '1 month - 1 day'
+      ]]>
+    </dataset>
+    <template>
+      <![CDATA[
+   <div class="report-data">
+     <h1>{{first.total}}</h1>
+     <small>Total Incomes</small>
+     <div class="report-tags"><span class="label label-important">Today : {{first.total_qty}}</span></div>
+   </div>
+   ]]>
+    </template>
+  </custom>
+  
+  
+  <custom name="custom-report-sale-year" title="Yearly Sales" css="report-box" >
+    <dataset type="sql">
+      <![CDATA[
+      SELECT sum(total_price) as total,count(id) as total_qty from sale_order where order_date <= date_trunc('month',CURRENT_DATE) + interval '1 month - 1 day'
+      ]]>
+    </dataset>
+    <template>
+      <![CDATA[
+   <div class="report-data">
+     <h1>{{first.total}}</h1>
+     <small>Total Incomes</small>
+     <div class="report-tags"><span class="label label-important">Today : {{first.total_qty}}</span></div>
+   </div>
+   ]]>
+    </template>
+  </custom>
+  
+</object-views>

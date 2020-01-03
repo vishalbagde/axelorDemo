@@ -8,8 +8,9 @@
   <entity name="OrderLine">
     <many-to-one name="saleOrder" ref="Order" />
     <many-to-one name="product" ref="Product"/>
-    <decimal name="price" precision="20" scale="4" min="0.0" required="true" />
+    <decimal name="price" required="true" />
     <integer name="quantity" min="1" required="true"/>
+    <decimal name="productTotal"></decimal>
     <integer name="sequence"/>
     <many-to-one name="taxes" ref="Tax"/>
 
