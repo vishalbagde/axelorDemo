@@ -39,10 +39,10 @@ allprojects {
   targetCompatibility = 1.8
 }
 
-
 dependencies {
   compile project(':modules:axelor-person')
   compile project(':modules:axelor-project')
+  compile project(':modules:axelor-sale')
 }
 
 wrapper {

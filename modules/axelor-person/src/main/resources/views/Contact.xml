@@ -10,9 +10,17 @@
     <option value="deleted">Deleted</option>
   </selection>
 
+
+  <grid model="com.axelor.person.db.Contact" title="Person Details" name="person-grid">
+    <field name="firstName"/>
+    <field name="lastName"/>
+    <field name="email"/>
+    <field name="phone"/>
+    <field name="company"/>
+  </grid>
+
   <tree name="contact-email-tree" title="Contact Email Tasks"
     width="50%">
-
     <!-- define tree columns -->
     <column name="firstName" type="string" />
     <column name="email" type="string" />
@@ -56,7 +64,7 @@
   </cards>
 
   <form model="com.axelor.person.db.Contact" title="Person Form"
-    name="person-form">
+    name="person-form" onSave="action-contact-group-on-save-attribute" >
     <panel title="Personal" css="panel-red">
       <panel colSpan="4">
         <field name="image" showTitle="false" colSpan="12"></field>
@@ -65,23 +73,23 @@
         <field name="fullName" title="Name" readonly="false"
           colSpan="12">
           <editor x-show-titles="false">
-            <field name="title" widget="SuggestBox" colSpan="2" />
+            <field name="title" colSpan="2" />
             <field name="firstName" colSpan="5" />
             <field name="lastName" colSpan="5" />
           </editor>
         </field>
-        <field name="dateOfBirth" colSpan="6" />
+        <field name="priority" title="Show Priority" colSpan="4" />
+        <field name="dateOfBirth" colSpan="4" />
         <field name="status" selection="contact.status.selection"
-          colSpan="6" />
+          colSpan="4" />
       </panel>
     </panel>
     <panel title="Contacts" css="panel-green">
       <field name="emails">
         <editor layout="table" x-show-titles="false">
-          <field name="email" />
+          <field name="email"/>
         </editor>
       </field>
-
 
       <field name="phones">
         <editor layout="table" x-show-titles="false">
@@ -90,7 +98,6 @@
           <field name="phone" css="border-left-none" />
         </editor>
       </field>
-
 
       <field name="addresses" colSpan="12">
         <editor x-show-titles="false">
@@ -114,7 +121,7 @@
   </form>
 
 
-  <kanban name="person-kanban" sequenceBy="firstName"
+  <kanban name="person-kanban" sequenceBy="priority"
     model="com.axelor.person.db.Contact" columnBy="status"
     title="Person Details">
     <field name="firstName" />
@@ -130,17 +137,33 @@
           <i class='fa fa-clock-o'></i> <span>{{lastName}}</span>
         </div>
       ]]></template>
-
   </kanban>
-
 
   <action-view name="contacts.task.open.contact"
     title="Contact" model="com.axelor.person.db.Contact">
     <view type="grid" name="person-grid" />
-    <view type="form" name="project-form" />
+    <view type="form" name="person-form" />
     <domain>self.id= :contact_id</domain>
-    <context name="project_id" expr="eval: id" />
+    <context name="contact_id" expr="eval: id" />
     <context name="_showSingle" expr="true" />
   </action-view>
+
+  <action-method name="action-contact-method-on-save-set-full-name">
+    <call class="com.axelor.person.db.web.ContactController" method="setFullName"/>
+  </action-method>
+
+  <action-method name="action-contact-method-on-save-set-email">
+    <call class="com.axelor.person.db.web.ContactController" method="setEmail"/>
+  </action-method>
+
+  <action-method name="action-contact-method-on-save-set-phone">
+    <call class="com.axelor.person.db.web.ContactController" method="setPhone"/>
+  </action-method>
+
+  <action-group name="action-contact-group-on-save-attribute">
+    <action name="action-contact-method-on-save-set-full-name"/>
+    <action name="action-contact-method-on-save-set-email"/>
+    <action name="action-contact-method-on-save-set-phone"/>
+  </action-group>
 
 </object-views>

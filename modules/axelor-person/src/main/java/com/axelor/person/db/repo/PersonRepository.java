@@ -3,7 +3,7 @@ package com.axelor.person.db.repo;
 import com.axelor.person.db.Contact;
 import java.util.Map;
 
-public class ContactRepository extends AbstractContactRepository {
+public class PersonRepository extends ContactRepository {
 
   @Override
   public Map<String, Object> populate(Map<String, Object> json, Map<String, Object> context) {

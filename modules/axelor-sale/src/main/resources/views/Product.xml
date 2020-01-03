@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+  <selection name="selection.sale.product.color">
+    <option value="white">White</option>
+    <option value="black">Black</option>
+    <option value="gree">green</option>
+    <option value="blue">Blue</option>
+  </selection>
+
+  <grid model="com.axelor.sale.db.Product" title="Product Details" name="product-grid">
+    <field name="productCode"/>
+    <field name="name"/>
+    <field name="color"></field>
+    <field name="category"></field>
+
+  </grid>
+
+  <form model="com.axelor.sale.db.Product" title="Product Details"
+    name="product-form">
+    <panel title="Product Details">
+      <panel colSpan="3">
+        <field name="image" />
+      </panel>
+      <panel colSpan="9">
+        <field name="productCode" />
+        <field name="name" />
+        <field name="color" selection="selection.sale.product.color" />
+      </panel>
+    </panel>
+    <panel title="Category">
+      <field name="category"></field>
+    </panel>
+    <panel title="Attribute">
+      <field name="attrs"/>
+    </panel>
+    <panel title="Product Note">
+      <field name="note"></field>
+    </panel>
+  </form>
+</object-views>

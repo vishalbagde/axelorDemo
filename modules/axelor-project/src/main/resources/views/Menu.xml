@@ -22,7 +22,7 @@
     model="com.axelor.project.db.ProjectTask">
     <view type="grid" name="project-task-grid" />
     <view type="form" name="project-task-form" />
-
+    <view type="calendar" name="project-task-calendar" />
   </action-view>
 
   <menuitem name="menu-project-task-tree-all" parent="menu-project"

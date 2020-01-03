@@ -8,6 +8,7 @@
   <entity name="Email" cacheable="true">
     <many-to-one name="contact" ref="com.axelor.person.db.Contact" required="true" />
     <string name="email" required="true" unique="true" namecolumn="true" />
+    <string name="testStr" namecolumn="true"/>
     <boolean name="primary" column="is_primary" />
     <boolean name="optOut" title="Opted out" />
     <boolean name="invalid" />

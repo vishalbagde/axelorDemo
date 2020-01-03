@@ -10,22 +10,25 @@
   </selection>
 
   <grid name="project-task-grid" title="project Task"
-    model="com.axelor.project.db.ProjectTask">
+    model="com.axelor.project.db.ProjectTask" orderBy="priority"  sortable="true">
     <field name="name" />
     <field name="createDate" />
     <field name="startDate" />
     <field name="endDate" />
     <field name="user" />
     <field name="project" />
-    <field name="priority" />
+    <field name="priority"  />
     <field name="state" />
     <field name="progress" widget="Progress" />
   </grid>
 
   <form name="project-task-form" title="Project Task"
-    model="com.axelor.project.db.ProjectTask">
+    model="com.axelor.project.db.ProjectTask" onNew="project.task.form.on.new,project.task.onCreateDate"
+    onSave="action-project-task-validate,check-project-task-date"
+
+    >
     <panel title="Overview">
-      <field name="name" />
+      <field name="name"  onChange="project.task.name.on.change" />
       <field name="priority" />
       <field name="createDate" />
       <field name="deadlineDate" />
@@ -35,19 +38,19 @@
       <field name="user" />
       <field name="parentTask" />
       <field name="sequence" />
-      <field name="state" />
+      <field name="state" onChange="project.task.state.on.select" />
       <field name="progress" widget="Progress" />
     </panel>
 
-
     <panel-tabs>
-      <panel-related field="workItems" editable="true">
+      <panel-related field="workItems"  editable="true" >
         <field name="name" />
         <field name="date" />
         <field name="hours" />
       </panel-related>
       <panel title="Notes">
         <field name="notes" showTitle="false" colSpan="12" />
+        <button name="clickMe" title="CLick Me" onClick="action-method-project-task-about"/>
       </panel>
       <panel title="Planning">
         <field name="plannedStartDate" />
@@ -64,7 +67,6 @@
       </panel>
     </panel-tabs>
   </form>
-
 
   <tree name="project-task-tree" title="Project Task Tree" css="">
     <column name="projectName" type="string" />
@@ -87,10 +89,11 @@
     </node>
   </tree>
 
-
   <kanban name="project-task-kanban" title="Project Tasks"
     model="com.axelor.project.db.ProjectTask" columnBy="state"
-    sequenceBy="priority" onNew="project.task.kanban.on.new" limit="10">
+    sequenceBy="priority" onNew="project.task.kanban.on.new" limit="10" onMove="project.task.kanban.on.move"
+    draggable="true"
+   >
     <field name="name" />
     <field name="notes" />
     <field name="progress" />
@@ -111,5 +114,69 @@
     ]]></template>
   </kanban>
 
+  <calendar name="project-task-calendar"
+    model="com.axelor.project.db.ProjectTask" eventStart="startDate"
+    eventStop="endDate" title="Project Task Calender" colorBy="name"
+    eventLength="1"
+    mode="month"
+    >
+    <field name="name" />
+  </calendar>
+
+  <action-record name="project.task.form.on.new" model="com.axelor.project.db.ProjectTask">
+    <field name="startDate"  expr="#{__time__.plusHours(24)}"/>
+    <field name="createDate" expr="eval: startDate ? startDate : __time__ "/>
+    <field name="user"  expr="eval: __user__"/>
+    <field name="workItems" expr="action:action-record-default-project-work"/>
+  </action-record>
+
+  <action-record name="project.task.kanban.on.new" model="com.axelor.project.db.ProjectTask" >
+    <field name="name" expr="#{_value}"/>
+    <field name="user" expr="#{__user__}"/>
+    <field name="createDate" expr="#{__time__}"/>
+    <field name="startDate" expr="#{__time__}"/>
+    <field name="endDate" expr="#{__time__.plusHours(1)}"/>
+    <field name="priority" expr="10"/>
+
+  </action-record>
+
+  <action-record name="action-record-default-project-work" model="com.axelor.project.db.ProjectWork">
+    <field name="name" expr="Test Work"/>
+    <field name="date" expr="#{__date__}"/>
+    <field name="hours" expr="#{__time__}"/>
+  </action-record>
+
+  <action-record name="project.task.kanban.on.move" model="com.axelor.project.db.ProjectTask">
+    <field name="progress" expr="50"/>
+  </action-record>
+
+  <action-attrs name="project.task.onCreateDate">
+    <attribute  for="startDate" name="readonly" expr="#{not empty createDate}"/>
+  </action-attrs>
+
+  <action-attrs name="project.task.name.on.change">
+    <attribute  for="name"  name="value" expr="#{name.toUpperCase()}" />
+  </action-attrs>
+
+  <action-attrs name="project.task.state.on.select">
+    <attribute  for="priority"  name="value" expr="5" if="#{state == 'todo'}" />
+    <attribute  for="priority"  name="value" expr="10" if="#{state == 'progress'}" />
+    <attribute  for="priority"  name="value" expr="15" if="#{state == 'complete'}" />
+  </action-attrs>
+
+   <action-validate name="action-project-task-validate">
+      <error message="Order Date is in future." if="endDate &lt; createDate"/>
+      <error message="Task Summury can't null" if="!state" />
+      <alert message="Not add any task work ! Did you like to continue?" if="!workItems"/>
+      <info message="Task is Created"  if="#{createDate == __datetime__"/>
+   </action-validate>
+
+   <action-condition name="check-project-task-date">
+       <check field="sequence" if="sequence &gt; 10" error="sequence cant greter then 10" />
+   </action-condition>
+
+   <action-method name="action-method-project-task-about">
+      <call class="com.axelor.project.db.web.HelloController" method="say"/>
+   </action-method>
 
 </object-views>

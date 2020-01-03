@@ -7,44 +7,72 @@
     title="Person Book" icon="fa-user" icon-background="green" />
 
 
-    <menuitem name="menu-emp-all" parent="menu-persons-book"
-    title="All Employee" action="emp.all" />
+  <menuitem name="menu-emp-all" parent="menu-persons-book"
+    title="All Person" action="emp.all" />
 
-    <menuitem name="menu-title-all" parent="menu-persons-book"
-    title="All Title" action="title.all" />
-
-    <menuitem name="menu-country-all" parent="menu-persons-book"
-    title="All Country" action="country.all" />
-
-    <menuitem name="menu-circle-all" parent="menu-persons-book"
-    title="All Circle" action="circle.all" />
-
-    <menuitem name="menu-testing-all" parent="menu-persons-book"
-    title="Tree View" action="testing.all" />
-
-    <action-view name="testing.all" title="Tree View"
+  <action-view name="emp.all" title="Employee"
     model="com.axelor.person.db.Contact">
-    <view type="tree" name="contact-email-tree" />
-  </action-view>
-
-
-    <menuitem name="menu-kanban-all" parent="menu-persons-book"
-    title="Kanban View" action="menu.person.kanban.all" />
-
-   <action-view name="menu.person.kanban.all" title="Kanban View"
-    model="com.axelor.person.db.Contact">
-    <view type="kanban" name="person-kanban" />
-  </action-view>
-
-
-
-    <action-view name="emp.all" title="Employee"
-    model="com.axelor.person.db.Contact">
+        <view type="grid" name="person-grid" />
     <view type="cards" name="person-cards" />
     <view type="form" name="person-form" />
     <view type="tree" name="contact-email-tree" />
     <context name="json-enhance" expr="true" />
   </action-view>
+
+  <menuitem name="menu-title-all" parent="menu-persons-book"
+    title="All Title" action="title.all" />
+
+  <menuitem name="menu-country-all" parent="menu-persons-book"
+    title="All Country" action="country.all" />
+
+  <menuitem name="menu-circle-all" parent="menu-persons-book"
+    title="All Circle" action="circle.all" />
+
+  <menuitem name="menu-testing-all" parent="menu-persons-book"
+    title="Tree View" action="testing.all" />
+
+  <action-view name="testing.all" title="Tree View"
+    model="com.axelor.person.db.Contact">
+    <view type="tree" name="contact-email-tree" />
+  </action-view>
+
+  <menuitem name="menu-company-all" parent="menu-persons-book"
+    title="Company View" action="company.all" />
+
+  <action-view name="company.all" title="Company View"
+    model="com.axelor.person.db.Company">
+    <view type="form" name="company-form" />
+    <view type="grid" name="company-grid" />
+  </action-view>
+
+  <menuitem name="menu-kanban-all" parent="menu-persons-book"
+    title="Kanban View" action="menu.person.kanban.all" />
+
+  <action-view name="menu.person.kanban.all"
+    title="Kanban View" model="com.axelor.person.db.Contact">
+    <view type="kanban" name="person-kanban" />
+  </action-view>
+
+
+  <menuitem name="menu-master-details-all"
+    parent="menu-persons-book" title="Master Details View"
+    action="menu.person.master.all" />
+
+  <menuitem name="menu-company" parent="menu-persons-book"
+    title="Master Details View" action="menu.company" />
+
+  <action-view name="menu.company" title="Company"
+    model="com.axelor.person.db.Company">
+    <view type="form" name="company-form" />
+  </action-view>
+
+  <action-view name="menu.person.master.all"
+    title="Master Details View" model="com.axelor.person.db.Country">
+    <view type="form" name="country-form" />
+    <view type="grid" name="country-grid" />
+    <view-param name="details-view" value="true" />
+  </action-view>
+
 
 
   <action-view name="title.all" title="Person"

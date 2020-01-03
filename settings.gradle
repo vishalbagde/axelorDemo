@@ -3,3 +3,4 @@ rootProject.name = 'open-platform-demo'
 // Include modules
 include "modules:axelor-person"
 include "modules:axelor-project"
+include "modules:axelor-sale"

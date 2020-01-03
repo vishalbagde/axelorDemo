@@ -11,6 +11,7 @@
     <many-to-one name="parent" ref="com.axelor.person.db.Company"/>
     <one-to-many name="employees" ref="com.axelor.person.db.Contact" mappedBy="company" />
     <string name="notes" multiline="true"/>
+    <many-to-one name="emails" ref="Email" />
   </entity>
 
 </domain-models>

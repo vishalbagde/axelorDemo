@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.2.xsd">
+
+  <module name="sale" package="com.axelor.sale.db"/>
+  <enum name="OrderStatus">
+    <item value="draft" name="DRAFT"/>
+    <item value="open" name="OPEN"/>
+    <item value="closed" name="CLOSED"/>
+    <item value="canceled" name="CANCELED"/>
+  </enum>
+
+  <sequence name="sale.order.seq" increment="1" initial="1" prefix="SO" padding="5" />
+
+  <entity name="Order">
+    <many-to-one name="customer" ref="Customer" />
+    <decimal name="totalPrice" required="true" />
+    <integer name="totalQuantity" min="1" required="true"/>
+    <integer name="sequence"/>
+    <date name="orderDate"/>
+    <date name="confirmDate"/>
+    <boolean name="confirmed" />
+    <enum name="orderStatus" ref="OrderStatus" default="DRAFT"></enum>
+    <one-to-many name="saleProducts" ref="OrderLine" mappedBy="saleOrder" />
+    <many-to-many name="taxes" ref="Tax"/>
+  </entity>
+
+</domain-models>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+  <form model="com.axelor.sale.db.Customer" title="Customer Details"
+    name="customer-form">
+
+    <panel>
+      <panel colSpan="5" >
+        <field name="customerName"></field>
+      </panel>
+    </panel>
+
+    <panel>
+      <panel colSpan="5">
+        <field name="phone" />
+      </panel>
+      <panel colSpan="7">
+        <field name="email" />
+      </panel>
+    </panel>
+
+  <panel title="Address">
+    <field name="ploatNo"/>
+    <field name="area"/>
+    <field name="city"/>
+   </panel>
+
+   <panel>
+     <field name="customerStatus"></field>
+   </panel>
+
+  </form>
+
+  <grid model="com.axelor.sale.db.Customer" title="Customre Details"
+    name="customer-grid">
+    <field name="customerName" />
+    <field name="phone" />
+    <field name="email" />
+    <field name="customerStatus"/>
+  </grid>
+</object-views>

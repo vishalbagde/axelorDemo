@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+
+  <menuitem title="Sales Management" name="menu-sale-management"
+    icon-background="blue" icon="fa-shopping-cart" />
+
+  <menuitem title="Product Category All"
+    name="menu-productCategory-all" parent="menu-sale-management"
+    action="productCategory-all" />
+
+  <action-view name="productCategory-all"
+    title="Product Category" model="com.axelor.sale.db.ProductCategory">
+    <view type="form" name="product-category-form" />
+    <view type="grid" name="product-category-grid" />
+  </action-view>
+
+
+  <menuitem title="Tax All" name="menu-tax-all"
+    parent="menu-sale-management" action="tax-all" />
+
+  <action-view name="tax-all" title="Tax "
+    model="com.axelor.sale.db.Tax">
+    <view type="form" name="tax-form" />
+    <view type="grid" name="tax-grid" />
+  </action-view>
+
+  <menuitem title="Product All" name="menu-product-all"
+    parent="menu-sale-management" action="product-all" />
+
+  <action-view name="product-all" title="Tax "
+    model="com.axelor.sale.db.Product">
+    <view type="form" name="product-form" />
+    <view type="grid" name="product-grid" />
+  </action-view>
+
+  <menuitem title="Order All" name="menu-order-all"
+    parent="menu-sale-management" action="order-all" />
+
+  <action-view name="order-all" title="Order "
+    model="com.axelor.sale.db.Order">
+    <view type="form" name="order-form" />
+    <view type="grid" name="order-grid" />
+  </action-view>
+
+
+<menuitem title="Customer All" name="menu-customer-all"
+    parent="menu-sale-management" action="customer-all" />
+
+  <action-view name="customer-all" title="Customer "
+    model="com.axelor.sale.db.Customer">
+    <view type="form" name="customer-form" />
+    <view type="grid" name="customer-grid" />
+  </action-view>
+
+
+
+
+</object-views>

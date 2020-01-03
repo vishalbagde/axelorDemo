@@ -5,7 +5,7 @@
 
   <module package="com.axelor.project.db" name="project"/>
 
-  <entity name="ProjectWork" table="PROJECT_WORK" cacheable="true">
+  <entity name="ProjectWork" table="PROJECT_WORK">
     <string name="name" required="true" />
     <date name="date" required="true" column="work_date" />
     <time name="hours" title="Time Spent" column="work_hours" />
@@ -13,5 +13,4 @@
     <many-to-one name="task" ref="ProjectTask" required="true" />
     <many-to-one name="user" column="user_id" ref="com.axelor.auth.db.User" />
   </entity>
-
 </domain-models>

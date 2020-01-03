@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.2.xsd">
+
+  <module name="sale" package="com.axelor.sale.db"/>
+
+  <entity name="Tax" cacheable="true">
+    <string name="taxCode" />
+    <string name="taxName" required="true" unique="true" min="2" namecolumn="true"/>
+    <decimal name="taxRate"/>
+    <one-to-many name="tax" ref="OrderLine" mappedBy="taxes"/>
+  </entity>
+</domain-models>

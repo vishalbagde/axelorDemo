@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.2.xsd">
+
+  <module name="sale" package="com.axelor.sale.db"/>
+  <enum name="CustomerStatus">
+    <item value="active" name="ACTIVE"/>
+    <item value="deactive" name="DEACTIVE"/>
+    <item value="block" name="BLOCK"/>
+    <item value="deleted" name="DELETED"/>
+  </enum>
+
+  <entity name="Customer">
+    <string name="customerName" required="true" namecolumn="true" />
+    <string name="phone" min="10" max="10" required="true"/>
+    <string name="email" />
+    <string name="ploatNo"/>
+    <string name="area"/>
+    <string name="city"/>
+
+    <enum name="customerStatus" ref="CustomerStatus" default="ACTIVE"/>
+
+  </entity>
+
+</domain-models>
