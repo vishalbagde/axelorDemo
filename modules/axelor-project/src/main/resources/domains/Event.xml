@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models
+  xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.2.xsd">
+
+  <module name="project" package="com.axelor.project.db" />
+
+  <enum name="EventStatus">
+    <item name="PENDING" value="pending" />
+    <item name="ACTIVE" value="active" />
+    <item name="DEACTIVE" value="deactive" />
+    <item name="CLOSED" value="closed" />
+  </enum>
+  <entity name="Event">
+    <string name="eventName" required="true" />
+    <string name="description" multiline="true" />
+    <enum name="eventStatus" ref="EventStatus" default="PENDING" />
+    <date name="startDate" />
+    <date name="endDate" />
+    <date name="regStartDate" />
+    <date name="regEndDate" />
+  </entity>
+
+</domain-models>

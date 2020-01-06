@@ -42,4 +42,14 @@
     <view type="kanban" name="project-task-kanban" />
   </action-view>
 
+
+  <menuitem name="menu-project-task-event" parent="menu-project"
+    title="All Event" action="projectTaskEvent.all" />
+
+  <action-view name="projectTaskEvent.all" title="Projects Event"
+    model="com.axelor.project.db.Event">
+    <view type="form" name="project-event-form" />
+    <view type="grid" name="project-event-grid" />
+  </action-view>
+
 </object-views>

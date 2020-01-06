@@ -5,8 +5,6 @@ import com.axelor.rpc.ActionResponse;
 import com.axelor.sale.db.Order;
 import com.axelor.sale.db.OrderLine;
 import com.axelor.sale.db.Tax;
-import com.axelor.sale.db.repo.OrderRepository;
-
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class OrderController {
 
   public void setTotalAmount(ActionRequest request, ActionResponse response) {
     Order order = request.getContext().asType(Order.class);
-    
+
     int total_qty = 0;
     float total_price = 0;
     float total_tax = 0;
