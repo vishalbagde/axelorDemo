@@ -16,9 +16,26 @@
 	<form name="project-event-form" title="Event Form"
 		model="com.axelor.project.db.Event">
 
-		<panel>
-			<field name="eventStatus" widget="nav-select" showTitle="false"
+		<panel >
+			<field readonly="true" name="eventStatus" widget="nav-select" showTitle="false"
 				colSpan="12" />
+		</panel>
+		
+		
+		
+		<panel itemSpan="12" sidebar="true">
+			<button name="statusPendingBtn" title="Pending" css="btn-info" hidden="true"
+				showIf="id &amp;&amp; eventStatus =='CLOSED'"  onClick="action-project-event-method-onclick-change-statusPending" />
+				
+			<button name="statusActiveBtn" title="Active" css="btn-success"
+				showIf="id &amp;&amp; eventStatus =='PENDING'" onClick="action-project-event-method-onclick-change-statusActive" />
+				
+			<button name="statusDeactiveBtn" title="Deactive" css="btn-warning"
+				showIf="id &amp;&amp; eventStatus =='ACTIVE'" onClick="action-project-event-method-onclick-change-statusDeactive" />
+				
+			<button name="statusClosedBtn" title="Closed" css="btn-danger"
+				hideIf="!id || eventStatus =='CLOSED'" onClick="action-project-event-method-onclick-change-statusClosed" />
+
 		</panel>
 
 		<panel>
@@ -63,7 +80,22 @@
 			error="Registrtion end date can't less then reg start date or can't grether end Date" />
 	</action-condition>
 
-
+	<action-method name="action-project-event-method-onclick-change-statusPending">
+		<call class="com.axelor.project.db.web.HelloController" method="changeStatus"/>
+	</action-method>
+	
+	<action-method name="action-project-event-method-onclick-change-statusActive">
+		<call class="com.axelor.project.db.web.HelloController" method="changeStatus"/>
+	</action-method>
+	
+		<action-method name="action-project-event-method-onclick-change-statusDeactive">
+		<call class="com.axelor.project.db.web.HelloController" method="changeStatus"/>
+	</action-method>		 
+	
+		<action-method name="action-project-event-method-onclick-change-statusClosed">
+		<call class="com.axelor.project.db.web.HelloController" method="changeStatus"/>
+	</action-method>
+			 	
 
 
 </object-views>
