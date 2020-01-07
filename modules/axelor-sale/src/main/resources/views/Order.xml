@@ -16,29 +16,29 @@
 
 
   <form model="com.axelor.sale.db.Order" title="Order Details"
-    name="order-form">
+    name="order-form" onNew="action-method-on-for-new-set-order-sequence">
     <panel>
       <panel colSpan="12" >
-        <field name="orderStatus" widget="nav-select" 
+        <field name="orderStatus" widget="nav-select" readonly="true"
           readonlyIf="!confirmed"></field>
       </panel>
     </panel>
 
-    <panel itemSpan="3">
-      <button name="statusDraftBtn" css="btn-primary" title="Draft"
-        showIf="orderStatus !='DRAFT' &amp;&amp; orderStatus !='OPEN' &amp;&amp; orderStatus !='CLOSED'"
+    <panel itemSpan="12" sidebar="true">
+      <button name="statusDraftBtn" css="btn-primary" title="Draft" hidden="true"
+        showIf="orderStatus =='CANCELED'"
         onClick="action-sale-order-attrs-on-click-change-statusDraft"
          />
       <button name="statusDraftBtn" css="btn-success" title="Open"
-        showIf="orderStatus !='OPEN' &amp;&amp; orderStatus !='CLOSED' &amp;&amp; orderStatus !='CANCELED'"
+        showIf="orderStatus =='DRAFT'"
         onClick="action-sale-order-attrs-on-click-change-statusOpen"
         />
       <button name="statusDraftBtn" css="btn-warning" title="Closed"
-        showIf="orderStatus !='CLOSED' &amp;&amp; orderStatus !='CANCELED'"
+        showIf="orderStatus =='OPEN'"
         onClick="action-sale-order-attrs-on-click-change-statusClosed"
          />
       <button name="statusDraftBtn" css="btn-danger"
-        title="Canceled" showIf="orderStatus !='CANCELED'"
+        title="Canceled" hideIf="orderStatus =='CANCELED'"
         onClick="action-sale-order-attrs-on-click-change-statusCanceled"
          />
     </panel>
@@ -53,7 +53,7 @@
       </panel>
 
       <panel colSpan="4">
-        <field name="confirmDate" />
+        <field name="confirmDate" readonlyIf="confirmed" />
         <field name="confirmed" widget="boolean-switch" />
       </panel>
     </panel>
@@ -109,21 +109,25 @@
     name="action-method-on-change-set-product-total">
     <call class="com.axelor.sale.db.web.OrderController"
       method="setProductTotal" />
-
   </action-method>
 
   <action-method
     name="action-method-on-change-set-order-total">
     <call class="com.axelor.sale.db.web.OrderController"
       method="setTotalAmount" />
-     
   </action-method>
-
 
   <action-group name="action-group-on-change-set-total">
     <action name="action-method-on-change-set-product-total" />
     <action name="action-method-on-change-set-order-total" />
   </action-group>
 
+
+
+  <action-method
+    name="action-method-on-for-new-set-order-sequence">
+    <call class="com.axelor.sale.db.web.OrderController"
+      method="setSaleOrderNo" />
+  </action-method>
 
 </object-views>

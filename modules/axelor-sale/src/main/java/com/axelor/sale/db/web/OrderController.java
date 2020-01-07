@@ -51,4 +51,9 @@ public class OrderController {
       }
     }
   }
+
+  public void setSaleOrderNo(ActionRequest request, ActionResponse response) {
+    Order order = request.getContext().asType(Order.class);
+    response.setFlash(order.getOrderNo());
+  }
 }

@@ -3,13 +3,15 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
 
-  <dashboard name="dashboard-main-sale" title="Sale Dashboard" >
-    <dashlet action="custom:custom-report-sale-today"  colSpan="4" />
-    <dashlet action="custom:custom-report-sale-month"  colSpan="4" />
-    <dashlet action="custom:custom-report-sale-year"  colSpan="4" />
+  <dashboard name="dashboard-main-sale" title="Sale Dashboard">
+    <dashlet action="custom:custom-report-sale-today" colSpan="4" />
+    <dashlet action="custom:custom-report-sale-month" colSpan="4" />
+    <dashlet action="custom:custom-report-sale-year" colSpan="4" />
+    <dashlet action="chart:chart.sales.per.month" />
   </dashboard>
 
-  <custom name="custom-report-sale-today" title="Today Sales" css="report-box" >
+  <custom name="custom-report-sale-today" title="Today Sales"
+    css="report-box">
     <dataset type="jpql">
       <![CDATA[
         select sum(totalPrice) as total,count(Id) as total_qty from Order where orderDate = current_date
@@ -25,7 +27,8 @@
    ]]>
     </template>
   </custom>
-  <custom name="custom-report-sale-month" title="Monthly Sales" css="report-box" >
+  <custom name="custom-report-sale-month" title="Monthly Sales"
+    css="report-box">
     <dataset type="sql">
       <![CDATA[
       SELECT sum(total_price) as total,count(id) as total_qty from sale_order where order_date <= date_trunc('month',CURRENT_DATE) + interval '1 month - 1 day'
@@ -43,7 +46,8 @@
   </custom>
 
 
-  <custom name="custom-report-sale-year" title="Yearly Sales" css="report-box" >
+  <custom name="custom-report-sale-year" title="Yearly Sales"
+    css="report-box">
     <dataset type="sql">
       <![CDATA[
       SELECT sum(total_price) as total,count(id) as total_qty from sale_order where order_date <= date_trunc('month',CURRENT_DATE) + interval '1 month - 1 day'
@@ -60,4 +64,8 @@
     </template>
   </custom>
 
+  <!-- <chart name="chart.sales.per.month" title="Sales per month"> <search-fields>
+    <field type="datetime" name="fromDateTime" title="From Date"/> <field type="datetime"
+    name="toDateTime" title="To Date"/> </search-fields> <category key="month"
+    type="month"/> <series key="amount" groupBy="customer" type="bar"/> </chart> -->
 </object-views>

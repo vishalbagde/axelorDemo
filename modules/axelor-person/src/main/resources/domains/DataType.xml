@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.2.xsd">
+
+  <module name="person" package="com.axelor.person.db" />
+
+  <entity name="DataType" >
+  <date name="localDate"/>
+  <time name="localTime"/>
+  <datetime name="localDateTime"/>
+  <datetime name="zoneDateTime" tz="true"/>
+  <boolean name="active"/>
+  <integer name="numberInt"/>
+  <decimal name="numberDec"/>
+  </entity>
+</domain-models>

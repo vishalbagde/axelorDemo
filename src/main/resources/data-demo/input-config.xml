@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<csv-inputs xmlns="http://axelor.com/xml/ns/data-import"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/data-import http://axelor.com/xml/ns/data-import/data-import_5.2.xsd">
+
+  <input file="titles.csv" type="com.axelor.person.db.Title" />
+  <input file="circle.csv" type="com.axelor.person.db.Circle">
+    <header>code,name</header>
+    <bind to="code" column="code"></bind>
+    <bind to="name" column="name"></bind>
+  </input>
+
+  <input file="circle2.csv" type="com.axelor.person.db.Circle"
+    search="self.code = :code" separator="\t">
+    <header>code,name</header>
+    <bind to="code" column="code"></bind>
+    <bind to="name" column="name"></bind>
+  </input>
+
+
+  <input file="country.csv" type="com.axelor.person.db.Country"
+    separator="\t">
+    <header>name,code</header>
+    <bind to="name" column="name"></bind>
+    <bind to="code" column="code"></bind>
+  </input>
+
+  <input file="company.csv" type="com.axelor.person.db.Company"></input>
+  <input file="contact.csv" type="com.axelor.person.db.Contact">
+
+    <bind to="firstName" column="firstName"></bind>
+    <bind to="lastName" column="lastName"></bind>
+    <bind to="fullName" eval='"${firstName} ${lastName}"'></bind>
+  </input>
+
+
+  <input file="tax.csv" type="com.axelor.sale.db.Tax"></input>
+
+  <input file="customer.csv" type="com.axelor.sale.db.Customer">
+    <bind to="email" if="email.empty">
+      <bind to="email" eval='"${customerName}@gmail.com"'></bind>
+    </bind>
+  </input>
+
+  <input file="product.csv" type="com.axelor.sale.db.Product">
+    <bind to="category">
+      <bind to="productCode" column="categoryCode"></bind>
+      <bind to="name" column="categoryName"></bind>
+    </bind>
+  </input>
+
+
+  <!-- sales module import -->
+
+  <input file="order.csv" type="com.axelor.sale.db.Order" call="com.axelor.csv.imports.SaleOrderImport:updateOrder"  >
+
+
+    <bind column="confirmed" to="confirmed"
+      eval="confirmed ==~ /^(TRUE|T|Y|1)$/ ? 'true' : 'false'" />
+
+    <bind to="customer">
+      <bind to="customerName" column="customerName"></bind>
+      <bind to="email" column="email"></bind>
+      <bind to="phone" column="phone"></bind>
+    </bind>
+
+    <bind to="saleProducts">
+      <bind column="q1" to="quantity" />
+      <bind column="r1" to="price" />
+
+      <bind to="taxes" column="t1" search="self.taxCode = :t1"/>
+
+      <bind to="product" search="self.productCode = :p1">
+        <bind to="productCode" column="p1"></bind>
+        <bind to="name" column="p1"></bind>
+      </bind>
+    </bind>
+    <bind to="saleProducts">
+      <bind column="q2" to="quantity" />
+      <bind column="r2" to="price" />
+
+      <bind to="taxes" column="t2" search="self.taxCode = :t2"/>
+      <bind to="product" search="self.productCode = :p2">
+        <bind to="productCode" column="p2"></bind>
+        <bind to="name" column="p2"></bind>
+      </bind>
+    </bind>
+  </input>
+</csv-inputs>

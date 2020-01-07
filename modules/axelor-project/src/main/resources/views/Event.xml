@@ -1,101 +1,92 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
-
-	<grid name="project-event-grid" title="Projects"
-		model="com.axelor.project.db.Event">
-		<field name="eventName" />
-		<field name="startDate" />
-		<field name="endDate" />
-		<field name="regStartDate" />
-		<field name="regEndDate" />
-		<field name="eventStatus" />
-	</grid>
-
-	<form name="project-event-form" title="Event Form"
-		model="com.axelor.project.db.Event">
-
-		<panel >
-			<field readonly="true" name="eventStatus" widget="nav-select" showTitle="false"
-				colSpan="12" />
-		</panel>
-		
-		
-		
-		<panel itemSpan="12" sidebar="true">
-			<button name="statusPendingBtn" title="Pending" css="btn-info" hidden="true"
-				showIf="id &amp;&amp; eventStatus =='CLOSED'"  onClick="action-project-event-method-onclick-change-statusPending" />
-				
-			<button name="statusActiveBtn" title="Active" css="btn-success"
-				showIf="id &amp;&amp; eventStatus =='PENDING'" onClick="action-project-event-method-onclick-change-statusActive" />
-				
-			<button name="statusDeactiveBtn" title="Deactive" css="btn-warning"
-				showIf="id &amp;&amp; eventStatus =='ACTIVE'" onClick="action-project-event-method-onclick-change-statusDeactive" />
-				
-			<button name="statusClosedBtn" title="Closed" css="btn-danger"
-				hideIf="!id || eventStatus =='CLOSED'" onClick="action-project-event-method-onclick-change-statusClosed" />
-
-		</panel>
-
-		<panel>
-			<field name="eventName" />
-		</panel>
-
-		<panel title="Event Date" itemSpan="3" attached="true">
-			<field name="startDate" />
-			<field name="endDate"
-				onChange="action-event-condition-check-end-date" />
-			<field name="regStartDate"
-				onChange="action-event-condition-check-reg-start-date" />
-			<field name="regEndDate"
-				onChange="action-event-condition-check-reg-end-date" />
-		</panel>
-
-		<panel>
-			<field name="description" colSpan="12" />
-		</panel>
-
-	</form>
-
-	<action-condition
-		name="action-event-condition-check-end-date">
-		<check field="endDate"
-			if="endDate != null &amp;&amp; endDate &lt; startDate "
-			error="Event End Date can't null or date not less then start date" />
-	</action-condition>
-
-	<action-condition
-		name="action-event-condition-check-reg-start-date">
-		<check field="regStartDate"
-			if="regStartDate != null &amp;&amp; startDate &gt; regStartDate || regStartDate &gt; endDate "
-			error="Registrtion start date can't less then start date or can't grether end Date" />
-	</action-condition>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
 
 
-	<action-condition
-		name="action-event-condition-check-reg-end-date">
-		<check field="regEndDate"
-			if="regEndDate != null &amp;&amp; regEndDate &lt; regStartDate || regEndDate &gt; endDate "
-			error="Registrtion end date can't less then reg start date or can't grether end Date" />
-	</action-condition>
+  <grid name="project-event-grid" title="Projects"
+    model="com.axelor.project.db.Event">
+    <field name="eventName" />
+    <field name="startDate" />
+    <field name="endDate" />
+    <field name="regStartDate" />
+    <field name="regEndDate" />
+    <field name="eventStatus" />
+  </grid>
 
-	<action-method name="action-project-event-method-onclick-change-statusPending">
-		<call class="com.axelor.project.db.web.HelloController" method="changeStatus"/>
-	</action-method>
-	
-	<action-method name="action-project-event-method-onclick-change-statusActive">
-		<call class="com.axelor.project.db.web.HelloController" method="changeStatus"/>
-	</action-method>
-	
-		<action-method name="action-project-event-method-onclick-change-statusDeactive">
-		<call class="com.axelor.project.db.web.HelloController" method="changeStatus"/>
-	</action-method>		 
-	
-		<action-method name="action-project-event-method-onclick-change-statusClosed">
-		<call class="com.axelor.project.db.web.HelloController" method="changeStatus"/>
-	</action-method>
-			 	
+  <form name="project-event-form" title="Event Form"
+    model="com.axelor.project.db.Event">
+    <panel >
+      <field readonly="true" name="eventStatus" widget="nav-select" showTitle="false"
+        colSpan="12" />
+    </panel>
+    <panel itemSpan="12" sidebar="true">
+
+      <button name="statusPendingBtn" title="Pending" css="btn-info" hidden="true"
+        showIf="id &amp;&amp; eventStatus =='CLOSED'"
+          onClick="action-project-event-method-onclick-change-statusPending" />
 
 
+      <button name="statusActiveBtn" title="Active" css="btn-success"
+        showIf="id &amp;&amp; eventStatus =='PENDING'"
+         onClick="action-project-event-method-onclick-change-statusActive" />
+
+      <button name="statusDeactiveBtn" title="Deactive" css="btn-warning"
+        showIf="id &amp;&amp; eventStatus =='ACTIVE'" onClick="action-project-event-method-onclick-change-statusDeactive" />
+
+      <button name="statusClosedBtn" title="Closed" css="btn-danger"
+        hideIf="!id || eventStatus =='CLOSED'" onClick="action-project-event-method-onclick-change-statusClosed" />
+    </panel>
+    <panel>
+      <field name="eventName" />
+    </panel>
+    <panel title="Event Date" itemSpan="3" attached="true">
+      <field name="startDate" />
+      <field name="endDate"
+        onChange="action-event-condition-check-end-date" />
+      <field name="regStartDate"
+        onChange="action-event-condition-check-reg-start-date" />
+      <field name="regEndDate"
+        onChange="action-event-condition-check-reg-end-date" />
+    </panel>
+    <panel>
+      <field name="description" colSpan="12" />
+    </panel>
+  </form>
+
+  <action-condition
+    name="action-event-condition-check-end-date">
+    <check field="endDate"
+      if="endDate != null &amp;&amp; endDate &lt; startDate "
+      error="Event End Date can't null or date not less then start date" />
+  </action-condition>
+
+  <action-condition
+    name="action-event-condition-check-reg-start-date">
+    <check field="regStartDate"
+      if="regStartDate != null &amp;&amp; startDate &gt; regStartDate || regStartDate &gt; endDate "
+      error="Registrtion start date can't less then start date or can't grether end Date" />
+  </action-condition>
+
+  <action-condition
+    name="action-event-condition-check-reg-end-date">
+    <check field="regEndDate"
+      if="regEndDate != null &amp;&amp; regEndDate &lt; regStartDate || regEndDate &gt; endDate "
+      error="Registrtion end date can't less then reg start date or can't grether end Date" />
+  </action-condition>
+
+  <action-method name="action-project-event-method-onclick-change-statusPending">
+    <call class="com.axelor.project.db.web.HelloController" method="changeStatus"/>
+  </action-method>
+
+  <action-method name="action-project-event-method-onclick-change-statusActive">
+    <call class="com.axelor.project.db.web.HelloController" method="changeStatus"/>
+  </action-method>
+
+    <action-method name="action-project-event-method-onclick-change-statusDeactive">
+    <call class="com.axelor.project.db.web.HelloController" method="changeStatus"/>
+  </action-method>
+    <action-method name="action-project-event-method-onclick-change-statusClosed">
+    <call class="com.axelor.project.db.web.HelloController" method="changeStatus"/>
+  </action-method>
 </object-views>
