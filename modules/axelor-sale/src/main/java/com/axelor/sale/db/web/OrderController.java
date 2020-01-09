@@ -1,10 +1,15 @@
 package com.axelor.sale.db.web;
 
+import com.axelor.data.ImportTask;
+import com.axelor.data.Importer;
+import com.axelor.data.csv.CSVImporter;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
 import com.axelor.sale.db.Order;
 import com.axelor.sale.db.OrderLine;
 import com.axelor.sale.db.Tax;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -56,4 +61,32 @@ public class OrderController {
     Order order = request.getContext().asType(Order.class);
     response.setFlash(order.getOrderNo());
   }
+
+  public void importCsvCountry(ActionRequest request, ActionResponse response) {
+
+    Importer importer = new CSVImporter("./data/csv-config.xml");
+    importer.run(
+        new ImportTask() {
+          @Override
+          public void configure() throws IOException {
+            input("[country]", new File("./data-demo/input/country3.csv"));
+          }
+        });
+    response.setFlash("call csv import");
+  }
+  //	private File getDataCsvFile(MetaFile dataFile) {
+  //
+  //		File csvFile = null;
+  //		try {
+  //			File tempDir = Files.createTempDir();
+  //			csvFile = new File(tempDir, "country3.csv");
+  //
+  //			Files.copy(MetaFiles.getPath(dataFile).toFile(), csvFile);
+  //
+  //		} catch (Exception e) {
+  //			e.printStackTrace();
+  //		}
+  //		return csvFile;
+  //	}
+
 }

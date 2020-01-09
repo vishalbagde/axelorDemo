@@ -4,12 +4,10 @@
   xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.2.xsd">
 
   <module name="person" package="com.axelor.person.db" />
-
   <entity name="Phone" cacheable="true">
     <many-to-one name="contact" ref="com.axelor.person.db.Contact" required="true" />
     <string name="phone" required="true" namecolumn="true" />
     <string name="phoneType" title="Type" />
     <boolean name="primary" column="is_primary" />
   </entity>
-
 </domain-models>

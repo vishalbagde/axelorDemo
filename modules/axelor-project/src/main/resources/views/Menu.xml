@@ -52,4 +52,13 @@
     <view type="grid" name="project-event-grid" />
   </action-view>
 
+  <menuitem name="menu-employee-event" parent="menu-project"
+    title="All Employee" action="employee.all" />
+
+  <action-view name="employee.all" title="Employee Event"
+    model="com.axelor.project.db.Employee">
+    <view type="grid" name="employee-grid" />
+    <view type="form" name="employee-form" />
+  </action-view>
+
 </object-views>

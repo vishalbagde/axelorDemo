@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<csv-inputs xmlns="http://axelor.com/xml/ns/data-import"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/data-import http://axelor.com/xml/ns/data-import/data-import_3.1.xsd">
+
+   <adapter name="LocalDate" type="com.axelor.data.adapter.JavaTimeAdapter">
+    <option name="type" value="LocalDate"></option>
+    <option name="format" value="dd/MM/yyyy"></option>
+  </adapter>
+
+  <adapter name="LocalTime" type="com.axelor.data.adapter.JavaTimeAdapter">
+    <option name="type" value="LocalTime"/>
+    <option name="format" value="HH:mm"/>
+  </adapter>
+
+
+  <adapter name="LocalDateTime" type="com.axelor.data.adapter.JavaTimeAdapter">
+    <option name="type" value="LocalDateTime"/>
+    <option name="format" value="dd/MM/yyyy HH:mm"/>
+  </adapter>
+
+
+  <adapter name="DateTime" type="com.axelor.data.adapter.JavaTimeAdapter">
+    <option name="type" value="DateTime"/>
+    <option name="format" value="dd/MM/yyyy HH:mm"/>
+  </adapter>
+
+  <adapter name="Myboolean" type="com.axelor.csv.adapter.MyBooleanAdapter">
+    <option name="truePattern" value="(T|1|True)"/>
+  </adapter>
+
+  <adapter name="Number" type="com.axelor.data.adapter.NumberAdapter">
+    <option name="thousandSeparator" value=","/>
+    <option name="decimalSeparator" value="."/>
+  </adapter>
+
+
+
+
+
+  <input file="" type=""></input>
+
+</csv-inputs>

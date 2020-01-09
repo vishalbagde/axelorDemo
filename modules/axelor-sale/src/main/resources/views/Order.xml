@@ -18,29 +18,25 @@
   <form model="com.axelor.sale.db.Order" title="Order Details"
     name="order-form" onNew="action-method-on-for-new-set-order-sequence">
     <panel>
-      <panel colSpan="12" >
+      <panel colSpan="12">
         <field name="orderStatus" widget="nav-select" readonly="true"
           readonlyIf="!confirmed"></field>
       </panel>
     </panel>
 
     <panel itemSpan="12" sidebar="true">
-      <button name="statusDraftBtn" css="btn-primary" title="Draft" hidden="true"
-        showIf="orderStatus =='CANCELED'"
-        onClick="action-sale-order-attrs-on-click-change-statusDraft"
-         />
+      <button name="statusDraftBtn" css="btn-primary" title="Draft"
+        hidden="true" showIf="orderStatus =='CANCELED'"
+        onClick="action-sale-order-attrs-on-click-change-statusDraft" />
       <button name="statusDraftBtn" css="btn-success" title="Open"
         showIf="orderStatus =='DRAFT'"
-        onClick="action-sale-order-attrs-on-click-change-statusOpen"
-        />
+        onClick="action-sale-order-attrs-on-click-change-statusOpen" />
       <button name="statusDraftBtn" css="btn-warning" title="Closed"
         showIf="orderStatus =='OPEN'"
-        onClick="action-sale-order-attrs-on-click-change-statusClosed"
-         />
+        onClick="action-sale-order-attrs-on-click-change-statusClosed" />
       <button name="statusDraftBtn" css="btn-danger"
         title="Canceled" hideIf="orderStatus =='CANCELED'"
-        onClick="action-sale-order-attrs-on-click-change-statusCanceled"
-         />
+        onClick="action-sale-order-attrs-on-click-change-statusCanceled" />
     </panel>
 
 
@@ -71,10 +67,24 @@
       <button colSpan="3" name="totalAmount" if="!saleProducts"
         onClick="action-method-on-change-set-order-total"
         title="Calculate Total Amt" widget="info-button" css="btn-primary" />
+
       <field colOffset="10" title="Tot Qty" readonly="true"
         name="totalQuantity"></field>
       <field colOffset="10" name="totalPrice" readonly="true"></field>
     </panel>
+
+    <panel>
+      <button name="importCountry"
+        onClick="com.axelor.csv.controller.CsvImportController:importCsvDate"
+        title="Import" css="btn-info" />
+
+        <button name="importTest"
+        onClick="data.import"
+        title="Import" css="btn-info" />
+
+    </panel>
+
+
   </form>
 
 
@@ -129,5 +139,8 @@
     <call class="com.axelor.sale.db.web.OrderController"
       method="setSaleOrderNo" />
   </action-method>
+
+
+
 
 </object-views>
