@@ -3,15 +3,12 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
 
-
-
 <form name="employee-form" title="Employee" model="com.axelor.project.db.Employee">
   <panel title="Overview">
     <field name="empCode"/>
     <field name="firstName"/>
     <field name="lastName"/>
   </panel>
-
   <panel-related field="projectSet" target="com.axelor.project.db.Project" editable="true">
     <field name="name" />
   </panel-related>
@@ -24,6 +21,4 @@
     <field name="lastName"/>
     <field name="projectSet"></field>
 </grid>
-
-
 </object-views>

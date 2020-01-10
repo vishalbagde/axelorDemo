@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
 
-  <dashboard name="dashboard-main-sale" title="Sale Dashboard">
-    <dashlet action="custom:custom-report-sale-today" colSpan="4" />
-    <dashlet action="custom:custom-report-sale-month" colSpan="4" />
-    <dashlet action="custom:custom-report-sale-year" colSpan="4" />
-    <dashlet action="chart:chart.sales.per.month" />
-  </dashboard>
+	<dashboard name="dashboard-main-sale" title="Sale Dashboard">
+		<dashlet action="custom:custom-report-sale-today" colSpan="4" />
+		<dashlet action="custom:custom-report-sale-month" colSpan="4" />
+		<dashlet action="custom:custom-report-sale-year" colSpan="4" />
+		<dashlet action="chart:chart.sales.per.month" />
+	</dashboard>
 
-  <custom name="custom-report-sale-today" title="Today Sales"
-    css="report-box">
-    <dataset type="jpql">
+	<custom name="custom-report-sale-today" title="Today Sales"
+		css="report-box">
+		<dataset type="jpql">
       <![CDATA[
         select sum(totalPrice) as total,count(Id) as total_qty from Order where orderDate = current_date
       ]]>
     </dataset>
-    <template>
+		<template>
       <![CDATA[
    <div class="report-data">
      <h1>{{first.total}}</h1>
@@ -26,15 +26,15 @@
    </div>
    ]]>
     </template>
-  </custom>
-  <custom name="custom-report-sale-month" title="Monthly Sales"
-    css="report-box">
-    <dataset type="sql">
+	</custom>
+	<custom name="custom-report-sale-month" title="Monthly Sales"
+		css="report-box">
+		<dataset type="sql">
       <![CDATA[
       SELECT sum(total_price) as total,count(id) as total_qty from sale_order where order_date <= date_trunc('month',CURRENT_DATE) + interval '1 month - 1 day'
       ]]>
     </dataset>
-    <template>
+		<template>
       <![CDATA[
    <div class="report-data">
      <h1>{{first.total}}</h1>
@@ -43,17 +43,17 @@
    </div>
    ]]>
     </template>
-  </custom>
+	</custom>
 
 
-  <custom name="custom-report-sale-year" title="Yearly Sales"
-    css="report-box">
-    <dataset type="sql">
+	<custom name="custom-report-sale-year" title="Yearly Sales"
+		css="report-box">
+		<dataset type="sql">
       <![CDATA[
       SELECT sum(total_price) as total,count(id) as total_qty from sale_order where order_date <= date_trunc('month',CURRENT_DATE) + interval '1 month - 1 day'
       ]]>
     </dataset>
-    <template>
+		<template>
       <![CDATA[
    <div class="report-data">
      <h1>{{first.total}}</h1>
@@ -62,10 +62,37 @@
    </div>
    ]]>
     </template>
-  </custom>
+	</custom>
 
-  <!-- <chart name="chart.sales.per.month" title="Sales per month"> <search-fields>
-    <field type="datetime" name="fromDateTime" title="From Date"/> <field type="datetime"
-    name="toDateTime" title="To Date"/> </search-fields> <category key="month"
-    type="month"/> <series key="amount" groupBy="customer" type="bar"/> </chart> -->
+	<chart name="chart.sales.per.month" title="Sales per month">
+	<!-- 		
+		<dataset type="sql">		
+		 select extract(MONTH FROM s.order_date) as month,
+		 c.customer_name as name,
+		 sum(total_price) as total 
+		 from sale_order as s 
+		 left join sale_customer as c 
+		 on c.id=s.customer group by s.customer,c.customer_name,month
+		</dataset>
+	 -->
+		
+		<dataset type="jpql">		
+		 select
+		 SUM(totalPrice) as total, 
+		 MONTH(orderDate) as month,
+		 c.customerName as name
+		 from 
+		 Order self 
+		 left join 
+		 self.customer as c  
+		 group by
+		 c,
+		 MONTH(orderDate) 
+		</dataset>
+		
+		<category key="month" type="month" />
+		<series key="total" groupBy="name" type="bar" />
+	</chart>
+
+
 </object-views>
