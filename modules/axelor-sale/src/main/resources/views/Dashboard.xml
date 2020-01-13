@@ -3,12 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.2.xsd">
 
-	<dashboard name="dashboard-main-sale" title="Sale Dashboard">
+	<dashboard name="dashboard-main-sale" title="Sale Dashboard" >
 		<dashlet action="custom:custom-report-sale-today" colSpan="4" />
 		<dashlet action="custom:custom-report-sale-month" colSpan="4" />
 		<dashlet action="custom:custom-report-sale-year" colSpan="4" />
-		<dashlet action="chart:chart.sales.per.month" />
+		<dashlet action="chart:chart.sales.per.month" colSpan="6" />
+		<dashlet action="chart:chart.sale.per.category" colSpan="6" />
 	</dashboard>
+	
+	
 
 	<custom name="custom-report-sale-today" title="Today Sales"
 		css="report-box">
@@ -65,34 +68,57 @@
 	</custom>
 
 	<chart name="chart.sales.per.month" title="Sales per month">
-	<!-- 		
-		<dataset type="sql">		
-		 select extract(MONTH FROM s.order_date) as month,
-		 c.customer_name as name,
-		 sum(total_price) as total 
-		 from sale_order as s 
-		 left join sale_customer as c 
-		 on c.id=s.customer group by s.customer,c.customer_name,month
+
+		<!-- <dataset type="sql"> select extract(MONTH FROM s.order_date) as month, 
+			c.customer_name as name, sum(total_price) as total from sale_order as s left 
+			join sale_customer as c on c.id=s.customer group by s.customer,c.customer_name,month 
+			</dataset> -->
+
+		<dataset type="jpql">
+		 <![CDATA[
+				 
+			SELECT
+		     	SUM(self.totalPrice) AS amount,
+		    MONTH(self.orderDate) AS month,
+		    _customer.customerName AS customer
+		  	FROM
+		      Order self
+		  	LEFT JOIN
+		      	self.customer AS _customer
+		  	WHERE
+		      YEAR(self.orderDate) = YEAR(current_date)
+		  	GROUP BY
+		      _customer,
+		      MONTH(self.orderDate)
+		  	ORDER BY
+		      month
+		  ]]> 
 		</dataset>
-	 -->
-		
-		<dataset type="jpql">		
-		 select
-		 SUM(totalPrice) as total, 
-		 MONTH(orderDate) as month,
-		 c.customerName as name
-		 from 
-		 Order self 
-		 left join 
-		 self.customer as c  
-		 group by
-		 c,
-		 MONTH(orderDate) 
-		</dataset>
-		
+
 		<category key="month" type="month" />
-		<series key="total" groupBy="name" type="bar" />
+		<series key="amount" groupBy="customer" type="bar" />
 	</chart>
+
+
+	<chart name="chart.sale.per.category" title="Sales per category">
+		<dataset type="sql">
+		select c.name as category_name,
+				sum(product_total) as amount
+		FROM sale_order_line line,
+			sale_product p,
+			sale_product_category c 
+		where 
+		line.product=p.id and p.category=c.id group by c.name;
+				
+		</dataset>
+		<category key="category_name" type="text"
+			title="Product Category" />
+		<series key="amount" type="donut" title="Amount" />
+	</chart>
+
+
+
+
 
 
 </object-views>

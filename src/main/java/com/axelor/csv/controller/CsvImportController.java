@@ -1,4 +1,5 @@
 package com.axelor.csv.controller;
+
 import com.axelor.data.Importer;
 import com.axelor.data.csv.CSVImporter;
 import com.axelor.rpc.ActionRequest;
@@ -17,7 +18,6 @@ public class CsvImportController {
 
 	public void importCsvDate(ActionRequest request, ActionResponse response) throws IOException {
 
-		File configFile = getConfigFile();
 		/*
 		 * Importer importer = new CSVImporter(configFile.getAbsolutePath());
 		 * importer.run(new ImportTask() {
@@ -28,13 +28,11 @@ public class CsvImportController {
 		 * getDataCsvFile("order.csv").getAbsoluteFile()); } });
 		 * response.setFlash("Import csv data");
 		 */
-
-		Importer importer1 = new CSVImporter(
-				getConfigFile().getAbsolutePath(),
-				getDataCsvFile());
-		
+		// File configFile = getConfigFile();
 		// Importer importer1 = new
 		// CSVImporter(configFile.getAbsolutePath(),getDataCsvDir().getAbsolutePath());
+
+		Importer importer1 = new CSVImporter(getConfigFile().getAbsolutePath(), getDataCsvFile());
 		importer1.run();
 	}
 
@@ -45,47 +43,46 @@ public class CsvImportController {
 		IOUtils.copy(is, os);
 		return configFile;
 	}
-	
+
 	public String getDataCsvFile() throws IOException {
-		
 		/*
-		File csvFile = File.createTempFile("temp-file", ".csv");
-		InputStream is = this.getClass().getResourceAsStream("/data-demo/input/");				
-		FileOutputStream os = new FileOutputStream(csvFile);
-		IOUtils.copy(is, os);
-		return csvFile;
-		*/
-		
+		 * File csvFile = File.createTempFile("temp-file", ".csv"); InputStream is =
+		 * this.getClass().getResourceAsStream("/data-demo/input/"); FileOutputStream os
+		 * = new FileOutputStream(csvFile); IOUtils.copy(is, os); return csvFile;
+		 */
 		URL url = this.getClass().getResource("/data-demo/input/");
 		return url.getPath();
-
 	}
 
 	private File getDataCsvDir(String filename) {
 		File tempDir = null;
-		try {		
-			tempDir = Files.createTempDir();				
-			InputStream is = this.getClass().getResourceAsStream("/data-demo/input/"+filename);
+		try {
+			tempDir = Files.createTempDir();
+			InputStream is = this.getClass().getResourceAsStream("/data-demo/input/" + filename);
 			FileOutputStream os = new FileOutputStream(tempDir);
 			IOUtils.copy(is, os);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return tempDir;
 	}
 
-	/*
-	 * public File getDataXmlFile(String filename) throws IOException { File xmlFile
-	 * = File.createTempFile("temp-file", ".xml"); InputStream is =
-	 * this.getClass().getResourceAsStream("/data-demo/xml/" + filename);
-	 * FileOutputStream os = new FileOutputStream(xmlFile); IOUtils.copy(is, os);
-	 * return xmlFile; } public File getXmlConfigFile() throws IOException { File
-	 * configFile = File.createTempFile("xml-config", ".xml"); InputStream is =
-	 * this.getClass().getResourceAsStream("/data-demo/xml-config.xml");
-	 * FileOutputStream os = new FileOutputStream(configFile); IOUtils.copy(is, os);
-	 * return configFile; }
-	 * 
-	 */
+	private File getDataDir() {
+		File tempDir = null;
+		try {
+
+			tempDir = Files.createTempDir();
+			File tempFile = new File(tempDir, "country3.xml");
+			InputStream is = this.getClass().getResourceAsStream("/data-demo/input/Country3.xml");
+			FileOutputStream os = new FileOutputStream(tempFile);
+			IOUtils.copy(is, os);
+			Files.copy(tempDir, tempFile);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return tempDir;
+	}
 
 }

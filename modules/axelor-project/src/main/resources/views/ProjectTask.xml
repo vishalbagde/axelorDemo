@@ -122,6 +122,26 @@
     >
     <field name="name" />
   </calendar>
+  
+  
+  
+   <gantt name="project-task-gantt" title="Task Planning" model="com.axelor.project.db.ProjectTask"
+    taskStart="plannedStartDate"
+    taskDuration="plannedDuration"
+    taskParent="parentTask"
+    taskSequence="sequence"
+    taskProgress="plannedProgress"
+    x-finish-to-start="finishToStartTaskSet"
+    x-start-to-start="startToStartTaskSet"
+    x-finish-to-finish="finishToFinishTaskSet"
+    x-start-to-finish="startToFinishaskSet">
+    <field name="name" />
+    <field name="project" />
+    <field name="user" />
+  </gantt>
+  
+  
+  
 
   <action-record name="project.task.form.on.new" model="com.axelor.project.db.ProjectTask">
     <field name="startDate"  expr="#{__time__.plusHours(24)}"/>

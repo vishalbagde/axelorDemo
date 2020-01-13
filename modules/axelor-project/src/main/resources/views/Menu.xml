@@ -60,5 +60,17 @@
     <view type="grid" name="employee-grid" />
     <view type="form" name="employee-form" />
   </action-view>
+  
+  
+  
+  <menuitem name="menu-project-tasks-gantt" parent="menu-project"
+    title="Task planning"
+    action="project.tasks.gantt"/>
+
+  <action-view name="project.tasks.gantt" title="Task planning" model="com.axelor.project.db.ProjectTask">
+    <view type="gantt" name="project-task-gantt"/>
+  </action-view>
+  
+  
 
 </object-views>

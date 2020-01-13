@@ -3,6 +3,15 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://axelor.com/xml/ns/data-import http://axelor.com/xml/ns/data-import/data-import_5.2.xsd">
 
+
+  <input file="country3.csv" type="com.axelor.person.db.Country"
+    separator="\t">
+    <header>name,code</header>
+    <bind to="name" column="name"></bind>
+    <bind to="code" column="code"></bind>
+  </input>
+  
+<!-- 
   <input file="[country]" type="com.axelor.person.db.Country"
     separator="\t">
     <header>name,code</header>
@@ -15,8 +24,8 @@
   <input file="[sale.order]" type="com.axelor.sale.db.Order"
   call="com.axelor.csv.imports.SaleOrderImport:updateOrder">
 
-    <!-- prepare-context="com.axelor.csv.imports.SaleOrderImport:createOrder"
-    call="com.axelor.csv.imports.SaleOrderImport:updateOrderForPrepareContext" -->
+    prepare-context="com.axelor.csv.imports.SaleOrderImport:createOrder"
+    call="com.axelor.csv.imports.SaleOrderImport:updateOrderForPrepareContext"
 
       <bind column="confirmed" to="confirmed"
         eval="confirmed ==~ /^(TRUE|T|Y|1)$/ ? 'true' : 'false'" />
@@ -49,5 +58,5 @@
       </bind>
     </bind>
   </input>
-
+ -->
 </csv-inputs>

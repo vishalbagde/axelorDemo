@@ -64,6 +64,15 @@
   </action-view>
 
 
+<menuitem title="Report All" name="menu-report-all"
+    parent="menu-sale-management"/>
+    
+    
+    
+<menuitem title="Category Wise Sales" name="menu-category-wise-sales"
+    parent="menu-report-all" action="action-order-print-report-category-wise-sale" />    
+	
+
 
 
 </object-views>
