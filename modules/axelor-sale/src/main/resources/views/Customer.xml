@@ -11,7 +11,7 @@
         <field name="customerName"></field>
       </panel>
     </panel>
-    
+
 
     <panel>
       <panel colSpan="5">
@@ -41,5 +41,5 @@
     <field name="email" />
     <field name="customerStatus"/>
   </grid>
-  
+
 </object-views>

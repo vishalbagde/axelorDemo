@@ -21,8 +21,8 @@
       + " " + lastName; ]]></string> -->
     <string name="fullName" namecolumn="true"></string>
     <date name="dateOfBirth" />
-    <binary name="image" title="Photo" help="Max size 4MB."
-      image="true" />
+    <!-- <binary name="image" title="Photo" help="Max size 4MB."      /> -->
+    <many-to-one name="image"  ref="com.axelor.meta.db.MetaFile" />
     <string name="notes" large="true" />
 
     <string name="email"/>

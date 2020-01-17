@@ -1644,9 +1644,21 @@ where line.sale_order = ?;]]></xml-property>
             <page-header>
                 <grid id="5">
                     <property name="height">0.90625in</property>
+                    <property name="width">7.84375in</property>
+                    <column id="379">
+                        <property name="width">0.71875in</property>
+                    </column>
                     <column id="6"/>
                     <row id="7">
                         <property name="height">0.90625in</property>
+                        <cell id="378">
+                            <image id="380">
+                                <property name="height">0.75in</property>
+                                <property name="width">0.5833333333333334in</property>
+                                <property name="source">file</property>
+                                <expression name="uri" type="constant">/home/axelor/.axelor/attachments/axelor1.jpg</expression>
+                            </image>
+                        </cell>
                         <cell id="8">
                             <label id="9">
                                 <property name="fontSize">14pt</property>
@@ -1858,6 +1870,10 @@ dataSetRow["area"]</expression>
                                         </cell>
                                         <cell id="44">
                                             <data id="51">
+                                                <structure name="dateTimeFormat">
+                                                    <property name="category">Custom</property>
+                                                    <property name="locale">ak</property>
+                                                </structure>
                                                 <property name="textAlign">left</property>
                                                 <property name="dataSet">sale_order</property>
                                                 <list-property name="boundDataColumns">

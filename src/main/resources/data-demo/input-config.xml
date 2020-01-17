@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xml-inputs xmlns="http://axelor.com/xml/ns/data-import"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://axelor.com/xml/ns/data-import http://axelor.com/xml/ns/data-import/data-import_5.2.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/data-import http://axelor.com/xml/ns/data-import/data-import_5.2.xsd">
 
-	<input file="contact.xml" root="contacts">
+  <input file="contact.xml" root="contacts">
 
-		<bind node="configs/title" type="com.axelor.person.db.Title">
-			<bind node="@code" to="code" />
-			<bind node="text()" to="name" />
-		</bind>
-	</input>
+    <bind node="configs/title" type="com.axelor.person.db.Title">
+      <bind node="@code" to="code" />
+      <bind node="text()" to="name" />
+    </bind>
+  </input>
 
 </xml-inputs>

@@ -13,7 +13,6 @@
     <decimal name="productTotal"></decimal>
     <integer name="sequence"/>
     <many-to-one name="taxes" ref="Tax"/>
-
   </entity>
 
 </domain-models>

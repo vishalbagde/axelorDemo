@@ -51,7 +51,18 @@
                     <text-property name="heading">qty</text-property>
                 </structure>
             </list-property>
-            <list-property name="parameters"/>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">id</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
             <structure name="cachedMetaData">
                 <list-property name="resultSet">
                     <structure>
@@ -105,7 +116,7 @@ on sale.id=line.sale_order
 left join sale_product as product 
 on line.product=product.id 
 left join sale_product_category as category 
-on product.category=category.id;]]></xml-property>
+on product.category=category.id ;]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -1351,5 +1362,9 @@ on product.category=category.id;]]></xml-property>
                 </structure>
             </list-property>
         </extended-item>
+        <text-data id="59">
+            <expression name="valueExpr">params["id"].value</expression>
+            <property name="contentType">html</property>
+        </text-data>
     </body>
 </report>

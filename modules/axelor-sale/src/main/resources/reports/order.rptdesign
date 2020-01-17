@@ -1017,7 +1017,7 @@ where line.sale_order = ?;]]></xml-property>
                         <property name="borderTopStyle">solid</property>
                         <property name="borderTopWidth">medium</property>
                         <property name="whiteSpace">nowrap</property>
-                        <property name="width">7.34375in</property>
+                        <property name="width">7.697916666666667in</property>
                         <property name="dataSet">Sale_Order_Line</property>
                         <list-property name="boundDataColumns">
                             <structure>
@@ -1074,7 +1074,7 @@ where line.sale_order = ?;]]></xml-property>
                             <property name="width">1.21875in</property>
                         </column>
                         <column id="334">
-                            <property name="width">0.96875in</property>
+                            <property name="width">1.3229166666666667in</property>
                         </column>
                         <header>
                             <row id="296">

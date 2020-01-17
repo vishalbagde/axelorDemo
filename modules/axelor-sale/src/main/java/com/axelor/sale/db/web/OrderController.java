@@ -15,6 +15,10 @@ import java.util.List;
 
 public class OrderController {
 
+  public void getProductIdList(ActionRequest request, ActionResponse response) {
+    response.setFlash("hello");
+  }
+
   public void setProductTotal(ActionRequest request, ActionResponse response) {
     // System.out.println(request.getContext().asType(OrderLine.class));
     OrderLine orderLine = request.getContext().asType(OrderLine.class);

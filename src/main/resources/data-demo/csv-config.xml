@@ -10,8 +10,8 @@
     <bind to="name" column="name"></bind>
     <bind to="code" column="code"></bind>
   </input>
-  
-<!-- 
+
+<!--
   <input file="[country]" type="com.axelor.person.db.Country"
     separator="\t">
     <header>name,code</header>

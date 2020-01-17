@@ -1,5 +1,6 @@
 package com.axelor.person.db.web;
 
+import com.axelor.app.AppSettings;
 import com.axelor.person.db.Contact;
 import com.axelor.person.db.Email;
 import com.axelor.person.db.Phone;
@@ -7,6 +8,7 @@ import com.axelor.person.db.service.ContactService;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
 import com.google.inject.Inject;
+import java.io.File;
 import java.util.List;
 
 // import com.axelor.meta.CallMethod;
@@ -16,6 +18,15 @@ public class ContactController {
 
   public String say(String what) {
     return "About : " + what;
+  }
+
+  public void addAttachmentPath(ActionRequest request, ActionResponse response) {
+
+    String attachmentPath = AppSettings.get().getPath("file.upload.dir", "");
+
+    attachmentPath =
+        attachmentPath.endsWith(File.separator) ? attachmentPath : attachmentPath + File.separator;
+    response.setFlash(attachmentPath);
   }
 
   public void setFullName(ActionRequest request, ActionResponse response) {

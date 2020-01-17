@@ -16,8 +16,8 @@
     <string name="orderNo" sequence="sale.order.seq"/>
     <many-to-one name="customer" ref="Customer" />
     <decimal name="totalTax" />
-    <decimal name="totalPrice" required="true" />
-    <integer name="totalQuantity" min="1" required="true"/>
+    <decimal name="totalPrice" required="true"  default="0" />
+    <integer name="totalQuantity" required="true" default="0"/>
     <date name="orderDate"/>
     <date name="confirmDate"/>
     <boolean name="confirmed" />
